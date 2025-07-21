@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Solo Leveling Inspired Design System */
+@layer base {
+  :root {
+    /* Core Dark Theme - Solo Leveling Inspired */
+    --background: 218 27% 8%;           /* Deep dark blue-black */
+    --foreground: 213 100% 92%;         /* Bright blue-white text */
+    
+    /* System UI Colors */
+    --card: 220 25% 12%;                /* Dark panels */
+    --card-foreground: 213 100% 90%;
+    
+    --popover: 220 28% 10%;
+    --popover-foreground: 213 100% 90%;
+    
+    /* Primary System Blue - The iconic Solo Leveling blue */
+    --primary: 213 100% 60%;            /* Bright system blue */
+    --primary-foreground: 220 25% 8%;
+    --primary-glow: 213 100% 70%;       /* Lighter glow version */
+    
+    /* Secondary Purple - For special elements */
+    --secondary: 264 89% 65%;           /* Deep purple */
+    --secondary-foreground: 220 25% 8%;
+    --secondary-glow: 264 89% 75%;
+    
+    /* Muted variants */
+    --muted: 220 20% 15%;
+    --muted-foreground: 213 30% 60%;
+    
+    /* Accent colors */
+    --accent: 264 89% 65%;
+    --accent-foreground: 220 25% 8%;
+    
+    /* Status colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --success: 142 76% 36%;
+    --success-glow: 142 76% 46%;
+    --warning: 45 93% 47%;
+    --warning-glow: 45 93% 57%;
+    
+    /* UI Elements */
+    --border: 220 20% 20%;
+    --input: 220 25% 12%;
+    --ring: 213 100% 60%;
+    
+    /* Radius */
+    --radius: 0.75rem;
+    
+    /* Custom Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-glow)));
+    --gradient-dark: linear-gradient(135deg, hsl(var(--background)), hsl(var(--card)));
+    --gradient-panel: linear-gradient(145deg, hsl(var(--card)), hsl(220 25% 14%));
+    
+    /* Shadows & Glows */
+    --shadow-glow: 0 0 20px hsl(var(--primary) / 0.3);
+    --shadow-glow-secondary: 0 0 20px hsl(var(--secondary) / 0.3);
+    --shadow-panel: 0 8px 32px hsl(220 25% 4% / 0.6);
+    --shadow-elevated: 0 16px 64px hsl(220 25% 4% / 0.8);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+/* Custom Components & Animations */
+@layer components {
+  /* System Panel - Solo Leveling Style */
+  .system-panel {
+    @apply bg-gradient-to-br from-card to-card/80 border border-primary/20 rounded-xl backdrop-blur-sm;
+    box-shadow: var(--shadow-panel), inset 0 1px 0 hsl(var(--primary) / 0.1);
+    transition: var(--transition-smooth);
+  }
+  
+  .system-panel:hover {
+    box-shadow: var(--shadow-elevated), var(--shadow-glow);
+    border-color: hsl(var(--primary) / 0.4);
+  }
+  
+  /* Glowing Button */
+  .btn-system {
+    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground font-semibold px-6 py-3 rounded-lg;
+    box-shadow: var(--shadow-glow);
+    transition: var(--transition-bounce);
+  }
+  
+  .btn-system:hover {
+    @apply scale-105;
+    box-shadow: var(--shadow-glow), 0 0 30px hsl(var(--primary) / 0.5);
+  }
+  
+  /* Secondary Glow Button */
+  .btn-secondary {
+    @apply bg-gradient-to-r from-secondary to-secondary-glow text-secondary-foreground font-semibold px-6 py-3 rounded-lg;
+    box-shadow: var(--shadow-glow-secondary);
+    transition: var(--transition-bounce);
+  }
+  
+  .btn-secondary:hover {
+    @apply scale-105;
+    box-shadow: var(--shadow-glow-secondary), 0 0 30px hsl(var(--secondary) / 0.5);
+  }
+  
+  /* Stat Bar */
+  .stat-bar {
+    @apply bg-muted rounded-full h-3 overflow-hidden relative;
+    box-shadow: inset 0 2px 4px hsl(220 25% 4% / 0.5);
+  }
+  
+  .stat-fill {
+    @apply h-full bg-gradient-to-r from-primary to-primary-glow rounded-full relative;
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.6);
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Quest Card */
+  .quest-card {
+    @apply system-panel p-6 hover:scale-[1.02] cursor-pointer;
+    transition: var(--transition-bounce);
+  }
+  
+  .quest-card:hover {
+    @apply border-primary/40;
+  }
+  
+  /* Level Badge */
+  .level-badge {
+    @apply bg-gradient-to-r from-warning to-warning-glow text-background px-3 py-1 rounded-full font-bold text-sm;
+    box-shadow: 0 0 15px hsl(var(--warning) / 0.4);
+  }
+  
+  /* Glass Panel */
+  .glass-panel {
+    @apply bg-card/20 border border-primary/10 rounded-xl backdrop-blur-md;
+    box-shadow: var(--shadow-panel);
+  }
+}
+
+@layer utilities {
+  /* Typography */
+  .text-glow {
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.7);
+  }
+  
+  .text-glow-secondary {
+    text-shadow: 0 0 10px hsl(var(--secondary) / 0.7);
+  }
+  
+  /* Animations */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  .animate-level-up {
+    animation: level-up 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .animate-quest-complete {
+    animation: quest-complete 1s ease-out;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+  }
+}
+
+@keyframes level-up {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.1);
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+@keyframes quest-complete {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-['Inter'];
+    background: linear-gradient(135deg, hsl(var(--background)), hsl(218 27% 6%));
+    min-height: 100vh;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-['Orbitron'];
+  }
+}
